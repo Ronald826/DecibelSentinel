@@ -30,13 +30,13 @@
 static uint8_t analogData;                  // Ato ni butanganan og data gikan sa analog pin. I've made it static para dili na mag unnecessary ang pag
                                             // allocate og deallocate para ani na variable throughout the program's lifetime. (Gamiton raba ni og loop func.)
 
-union pinOutStruct{                        // List all these pins in a constant variable. Make sure nga naa rani siya sa isa ka memory location.
+struct pinOutStruct{                        // List all these pins in a constant variable. Make sure nga naa rani siya sa isa ka memory location.
   cuint8_t activeBuzzer_signalPin = 2;
   cuint8_t bigSound_analogPin     = A0;
 };
 
 void setup(void){                                               // It is always a good-typing practice to be specific about your function arguments. Void = None. Thus, watay arguments ani na function.
-  union pinOutStruct pOS_0;                                    // Naay pulos ato "struct" nga gi-define.
+  struct pinOutStruct pOS_0;                                    // Naay pulos ato "struct" nga gi-define.
   
   pinMode(pOS_0.activeBuzzer_signalPin, OUTPUT);                // Ato-a pinModes kung pa-gawas ba ang data or pa-sulod sa Arduino.
   pinMode(pOS_0.bigSound_analogPin,      INPUT);
@@ -47,7 +47,7 @@ void setup(void){                                               // It is always 
 }
 
 void loop(void){
-  static union pinOutStruct pOS_1;
+  static struct pinOutStruct pOS_1;
 
   analogData = analogRead(pOS_1.bigSound_analogPin);
   Serial.println(analogData);
